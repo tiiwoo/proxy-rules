@@ -1,0 +1,8 @@
+#
+# Apple News
+#
+USER-AGENT,AppleNews*,US
+DOMAIN-SUFFIX,apple.news,US
+DOMAIN,news-events.apple.com,US
+DOMAIN,news-edge.apple.com,US
+DOMAIN,apple.comscoreresearch.com,US

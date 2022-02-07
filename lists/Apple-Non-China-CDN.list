@@ -1,0 +1,21 @@
+#
+# Apple Non-China CDN
+#
+# Trailer
+DOMAIN-SUFFIX,hls.itunes.apple.com,🚀 Proxy
+# Movie Stream
+DOMAIN-SUFFIX,hls-amt.itunes.apple.com,🚀 Proxy
+# iTunes Music Stream
+DOMAIN-SUFFIX,audio-ssl.itunes.apple.com,🚀 Proxy
+DOMAIN-SUFFIX,cdn-apple.com,🚀 Proxy
+DOMAIN,cdn.apple-cloudkit.com,🚀 Proxy
+# Developer
+DOMAIN,devimages-cdn.apple.com,🚀 Proxy
+DOMAIN,devstreaming-cdn.apple.com,🚀 Proxy
+DOMAIN,js-cdn.music.apple.com,🚀 Proxy
+DOMAIN,docs-assets.developer.apple.com,🚀 Proxy
+# Other
+DOMAIN-SUFFIX,apple-dns.net,🚀 Proxy
+# OCSP
+DOMAIN-SUFFIX,ocsp.apple.com,🚀 Proxy
+USER-AGENT,com.apple.trustd*,🚀 Proxy

@@ -1,0 +1,40 @@
+#
+# 一些 com.apple.appstored* 会连接的 API（优先级高）
+#
+DOMAIN,guzzoni.apple.com,🍎 Apple
+DOMAIN,apps.apple.com,🍎 Apple
+DOMAIN,xp.apple.com,🍎 Apple
+DOMAIN,bag.itunes.apple.com,🍎 Apple
+DOMAIN,api-edge.apps.apple.com,🍎 Apple
+DOMAIN,api.apps.apple.com,🍎 Apple
+DOMAIN,play.itunes.apple.com,🍎 Apple
+DOMAIN,se.itunes.apple.com,🍎 Apple
+DOMAIN,se-edge.itunes.apple.com,🍎 Apple
+DOMAIN,su.itunes.apple.com,🍎 Apple
+DOMAIN,upp.itunes.apple.com,🍎 Apple
+DOMAIN,beta.music.apple.com,🍎 Apple
+DOMAIN-KEYWORD,buy.itunes.apple.com,🍎 Apple
+DOMAIN-SUFFIX,itunes-apple.com.akadns.net,🍎 Apple
+#
+# Apple 其他自选
+#
+# iMessage
+DOMAIN-SUFFIX,ess.apple.com,🍎 Apple
+# Apple Music
+DOMAIN-SUFFIX,music.apple.com,🍎 Apple
+DOMAIN-SUFFIX,sonos-music.apple.com,🍎 Apple
+# Configuration
+DOMAIN,configuration.apple.com,🍎 Apple
+# Others
+DOMAIN-SUFFIX,aaplimg.com,🍎 Apple
+DOMAIN-SUFFIX,apple.co,🍎 Apple
+DOMAIN-SUFFIX,itunes.com,🍎 Apple
+DOMAIN-SUFFIX,itunes.apple.com,🍎 Apple
+DOMAIN-SUFFIX,apple,🍎 Apple
+DOMAIN,weather-analytics-events.apple.com,🍎 Apple
+# iCloud 上传和下载
+DOMAIN-SUFFIX,icloud-content.com,🍎 Apple
+DOMAIN-SUFFIX,me.com,🍎 Apple
+DOMAIN-SUFFIX,apple.com,🍎 Apple
+DOMAIN-SUFFIX,icloud.com,🍎 Apple
+DOMAIN-SUFFIX,apple-cloudkit.com,🍎 Apple
