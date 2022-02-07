@@ -2,30 +2,30 @@
 # Apple Global CDN
 #
 # iOS App Store
-DOMAIN,iosapps.itunes.apple.com,🍎 Apple CDN
+DOMAIN,iosapps.itunes.apple.com
 # Mac App Store
-DOMAIN,osxapps.itunes.apple.com,🍎 Apple CDN
-DOMAIN,oscdn.apple.com,🍎 Apple CDN
+DOMAIN,osxapps.itunes.apple.com
+DOMAIN,oscdn.apple.com
 # Update
-DOMAIN,supportdownload.apple.com,🍎 Apple CDN
+DOMAIN,supportdownload.apple.com
 # Update
-DOMAIN,appldnld.apple.com,🍎 Apple CDN
+DOMAIN,appldnld.apple.com
 # Update
-DOMAIN,swcdn.apple.com,🍎 Apple CDN
-DOMAIN,apptrailers.itunes.apple.com,🍎 Apple CDN
-DOMAIN,updates-http.cdn-apple.com,🍎 Apple CDN
-DOMAIN,updates.cdn-apple.com,🍎 Apple CDN
+DOMAIN,swcdn.apple.com
+DOMAIN,apptrailers.itunes.apple.com
+DOMAIN,updates-http.cdn-apple.com
+DOMAIN,updates.cdn-apple.com
 # App Store & iTunes Images
-DOMAIN-SUFFIX,mzstatic.com,🍎 Apple CDN
+DOMAIN-SUFFIX,mzstatic.com
 # Mac App Store
-PROCESS-NAME,storedownloadd,🍎 Apple CDN
+PROCESS-NAME,storedownloadd
 # iOS App Store
-USER-AGENT,com.apple.appstored*,🍎 Apple CDN
+USER-AGENT,com.apple.appstored*
 # Apple Music Streaming
-DOMAIN,aod.itunes.apple.com,🍎 Apple CDN
-DOMAIN,mvod.itunes.apple.com,🍎 Apple CDN
-DOMAIN,streamingaudio.itunes.apple.com,🍎 Apple CDN
+DOMAIN,aod.itunes.apple.com
+DOMAIN,mvod.itunes.apple.com
+DOMAIN,streamingaudio.itunes.apple.com
 # Other
-DOMAIN,download.developer.apple.com,🍎 Apple CDN
-DOMAIN,downloaddispatch.itunes.apple.com,🍎 Apple CDN
-DOMAIN,app-site-association.cdn-apple.com,🍎 Apple CDN
+DOMAIN,download.developer.apple.com
+DOMAIN,downloaddispatch.itunes.apple.com
+DOMAIN,app-site-association.cdn-apple.com
