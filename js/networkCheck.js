@@ -68,10 +68,10 @@
      $done({
        title: wifi.ssid ? wifi.ssid : cellularInfo,
        content:
-         (v4.primaryAddress ? `IPv4 : ${v4.primaryAddress} \n` : '') +
-         (v6.primaryAddress ? `IPv6 : ${v6.primaryAddress}\n` : '') +
-         (v4.primaryRouter && wifi.ssid ? `Router IPv4 : ${v4.primaryRouter}\n` : '') +
-         (v6.primaryRouter && wifi.ssid ? `Router IPv6 : ${v6.primaryRouter}\n` : '') +
+         // (v4.primaryAddress ? `IPv4 : ${v4.primaryAddress} \n` : '') +
+         // (v6.primaryAddress ? `IPv6 : ${v6.primaryAddress}\n` : '') +
+         // (v4.primaryRouter && wifi.ssid ? `Router IPv4 : ${v4.primaryRouter}\n` : '') +
+         // (v6.primaryRouter && wifi.ssid ? `Router IPv6 : ${v6.primaryRouter}\n` : '') +
          `IP : ${info.query}\n` +
          `ISP : ${info.isp}\n` +
          `Position : ${getFlagEmoji(info.countryCode)} | ${info.country} - ${info.city
