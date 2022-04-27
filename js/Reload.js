@@ -1,3 +1,4 @@
+
 /*
 Author：Pysta
 GitHub Link:https://github.com/mieqq/mieqq
@@ -8,11 +9,11 @@ GitHub Link:https://github.com/mieqq/mieqq
 */
 
 $httpAPI("POST", "/v1/profiles/reload", {}, data => {
-    $notification.post("Reload","Reload Successfully","")
+    $notification.post("配置重载","配置重载成功","")
     $done({
-        title: "Reload",
-        content: "Reload Successfully",
-        icon: "arrow.counterclockwise.icloud.fill",
+        title: "配置重载",
+        content: "配置重载成功",
+        icon: "pencil.and.outline",
         "icon-color": "#FF9500",
      })
     });

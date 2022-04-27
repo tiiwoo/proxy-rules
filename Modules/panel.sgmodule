@@ -1,9 +1,9 @@
 #!name=Panels
 #!desc=一个 Tiiwoo 自用的 Surge Panel
 [Panel]
-# Configuartion Reload
-Reload = title="Configuartion Reload",content="Configuartion Reload",icon=arrow.counterclockwise.icloud.fill,script-name="Configuartion Reload",update-interval=-1
+# 配置重载
+Reload = title=配置重载,content=配置重载,style=info,script-name=配置重载,update-interval=-1
 
 [Script]
-# Configuartion Reload
+# 配置重载
 Reload=script-path=https://raw.githubusercontent.com/Tiiwoo/proxy-rules/main/js/Reload.js,type=generic
