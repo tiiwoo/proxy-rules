@@ -14,13 +14,13 @@
    '466-89': '台灣之星',
    '466-05': '亞太電信',
    //中国电信业者 MNC Code
-   '460-03': '中国电信', '460-05': '中国电信', '460-11': '中国电信',
-   '460-01': '中国联通', '460-06': '中国联通', '460-09': '中国联通',
-   '460-00': '中国移动', '460-02': '中国移动', '460-04': '中国移动', '460-07': '中国移动', '460-08': '中国移动',
-   '460-15': '中国广电',
-   '460-20': '中国铁通',
+   '460-03': 'China Telecom', '460-05': 'China Telecom', '460-11': 'China Telecom',
+   '460-01': 'China Unicom', '460-06': 'China Unicom', '460-09': 'China Unicom',
+   '460-00': 'China Mobile', '460-02': 'China Mobile', '460-04': 'China Mobile', '460-07': 'China Mobile', '460-08': 'China Mobile',
+   '460-15': 'China Radio and television',
+   '460-20': 'China Tietong',
  };
- 
+
  const radioGeneration = {
    'GPRS': '2.5G',
    'CDMA1x': '2.5G',
@@ -36,11 +36,11 @@
    'NRNSA': '5G',
    'NR': '5G',
  };
- 
+
  if (!v4.primaryAddress && !v6.primaryAddress) {
    $done({
-     title: '没有网络',
-     content: '尚未连接网络\n请检查网络后重试',
+     title: 'No network',
+     content: 'The network is not connected yet\ncheck the network and try again',
      icon: 'wifi.exclamationmark',
      'icon-color': '#CB1B45',
    });
@@ -57,13 +57,13 @@
    $httpClient.get('http://ip-api.com/json', function (error, response, data) {
      if (error) {
        $done({
-         title: '发生错误',
-         content: '无法获得目前网络资讯\n请检查网络状态后重试',
+         title: 'An error occurred',
+         content: 'Unable to get current network information\ncheck the network status and try again',
          icon: 'wifi.exclamationmark',
          'icon-color': '#CB1B45',
        });
      }
- 
+
      const info = JSON.parse(data);
      $done({
        title: wifi.ssid ? wifi.ssid : cellularInfo,
@@ -72,16 +72,16 @@
          (v6.primaryAddress ? `IPv6 : ${v6.primaryAddress}\n` : '') +
          (v4.primaryRouter && wifi.ssid ? `Router IPv4 : ${v4.primaryRouter}\n` : '') +
          (v6.primaryRouter && wifi.ssid ? `Router IPv6 : ${v6.primaryRouter}\n` : '') +
-         `节点 IP : ${info.query}\n` +
-         `节点 ISP : ${info.isp}\n` +
-         `节点 位置 : ${getFlagEmoji(info.countryCode)} | ${info.country} - ${info.city
+         `IP : ${info.query}\n` +
+         `ISP : ${info.isp}\n` +
+         `Position : ${getFlagEmoji(info.countryCode)} | ${info.country} - ${info.city
          }`,
        icon: wifi.ssid ? 'wifi' : 'simcard',
        'icon-color': wifi.ssid ? '#005CAF' : '#F9BF45',
      });
    });
  }
- 
+
  function getFlagEmoji(countryCode) {
    const codePoints = countryCode
      .toUpperCase()
