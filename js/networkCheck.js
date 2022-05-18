@@ -1,6 +1,6 @@
 /**
  * Surge 网络信息面板
- * @Nebulosa-Cat
+ * @Nebulosa-Cat (changed by Tiiwoo)
  * 详细请见 README
  */
  const { wifi, v4, v6 } = $network;
@@ -74,6 +74,7 @@
          // (v6.primaryRouter && wifi.ssid ? `Router IPv6 : ${v6.primaryRouter}\n` : '') +
          `IP : ${info.query}\n` +
          `ISP : ${info.isp}\n` +
+         `AS : ${info.as}\n` +
          `Position : ${getFlagEmoji(info.countryCode)} ${info.country} | ${info.city
          }`,
        icon: wifi.ssid ? 'wifi.circle' : 'personalhotspot.circle',
