@@ -1,5 +1,5 @@
 #!name=🌐 DNS for myself
-#!desc=针对个人而言，连接校园网 wifi 会导致部分国内软件的图片加载出现问题，故对其进行 doh 分流，本模块均使用阿里dns
+#!desc=针对个人而言，连接校园网 wifi 会导致部分国内软件的图片加载出现问题，故对其进行 doh 分流，本模块均使用阿里dns或者dnspod来纠正结果
 #!author=Tiiwoo
 
 [General]
@@ -20,4 +20,4 @@ doh-follow-outbound-mode = true
 *.zhimg.com = server:https://dns.alidns.com/dns-query
 
 # > 豆瓣
-*.douban.com = server:https://dns.alidns.com/dns-query
+*.douban.com = server:https://doh.pub/dns-query
