@@ -18,6 +18,3 @@ doh-follow-outbound-mode = true
 
 # > 知乎 (仅对图片进行分流)
 *.zhimg.com = server:https://dns.alidns.com/dns-query
-
-# > 豆瓣
-*.douban.com = server:https://doh.pub/dns-query
