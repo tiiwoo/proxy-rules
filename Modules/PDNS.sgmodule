@@ -1,5 +1,5 @@
 #!name=🌐 DNS for myself
-#!desc=针对个人而言，连接校园网 wifi 会导致知乎和美团的图片加载出现问题，故对其进行 doh 分流，本模块均使用阿里dns
+#!desc=针对个人而言，连接校园网 wifi 会导致部分国内软件的图片加载出现问题，故对其进行 doh 分流，本模块均使用阿里dns
 #!author=Tiiwoo
 
 [General]
@@ -8,13 +8,16 @@ doh-follow-outbound-mode = true
 
 [Host]
 # > 美团
-*.dianping.com = server:https://dns.alidns.com/dns-query
-*.maoyan.com = server:https://dns.alidns.com/dns-query
-*.meituan.com = server:https://dns.alidns.com/dns-query
-*.meituan.net = server:https://dns.alidns.com/dns-query
-*.mtyun.com = server:https://dns.alidns.com/dns-query
-*.neixin.cn = server:https://dns.alidns.com/dns-query
-*.sankuai.com = server:https://dns.alidns.com/dns-query
+*.dianping.com = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
+*.maoyan.com = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
+*.meituan.com = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
+*.meituan.net = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
+*.mtyun.com = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
+*.neixin.cn = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
+*.sankuai.com = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
 
 # > 知乎 (仅对图片进行分流)
-*.zhimg.com = server:https://dns.alidns.com/dns-query
+*.zhimg.com = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
+
+# > 豆瓣
+*.douban.com = server:https://dns.alidns.com/dns-query, server:https://doh.pub/dns-query
