@@ -75,7 +75,8 @@
          `IP : ${info.query}\n` +
          `ISP : ${info.isp}\n` +
          `AS : ${info.as}\n` +
-         `Position : ${getFlagEmoji(info.countryCode)} ${info.country} | ${info.city
+         // `Position : ${getFlagEmoji(info.countryCode)} ${info.country} | ${info.city
+         `Position : ${getFlagEmoji(info.countryCode)} ${info.countryCode} | ${info.city
          }`,
        icon: wifi.ssid ? 'wifi.circle' : 'personalhotspot.circle',
        'icon-color': wifi.ssid ? '#005CAF' : '#F9BF45',
