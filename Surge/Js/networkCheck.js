@@ -74,8 +74,8 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
         `Position : ${getFlagEmoji(info.countryCode)} ${info.countryCode} | ${
           info.city
         }`,
-      // icon: wifi.ssid ? "wifi.circle" : "personalhotspot.circle",
-      icon: wifi.ssid ? "wifi" : "simcard",
+      icon: wifi.ssid ? "wifi.circle" : "personalhotspot.circle",
+      // icon: wifi.ssid ? "wifi" : "simcard",
       "icon-color": wifi.ssid ? "#005CAF" : "#F9BF45",
     });
   });
