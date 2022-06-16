@@ -59,6 +59,10 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
     }
 
     const info = JSON.parse(data);
+    if (info.as.includes('AS140224')) {
+      info.as = 'AS140224 STARCLOUD GLOBAL';
+      info.isp = 'STARCLOUD GLOBAL'
+    }
     $done({
       title: wifi.ssid ? wifi.ssid : cellularInfo,
       content:
