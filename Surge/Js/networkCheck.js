@@ -59,6 +59,9 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
     }
 
     const info = JSON.parse(data);
+    if (info.isp == '' && info.org != '') {
+      info.isp = info.org
+    }
     if (info.as.includes('AS140224')) {
       info.as = 'AS140224 STARCLOUD';
       info.isp = 'STARCLOUD GLOBAL'
@@ -94,7 +97,7 @@ function getFlagEmoji(countryCode) {
 }
 
 function loadCarrierNames() {
-  //整理邏輯:前三碼相同->後兩碼同電信->剩下的
+  // 整理逻辑:前三码相同->后两码同电信->剩下的
   return {
     // 台湾 Taiwan
     '466-11': 'Chunghwa Telecom', '466-92': 'Chunghwa Telecom',
