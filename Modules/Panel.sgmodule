@@ -1,5 +1,5 @@
 #!name=Panel
-#!desc=Tiiwoo's Panel, for personal use
+#!desc=Tiiwoo's Panel, for personal
 [Panel]
 # Network Info
 NetInfoPanel=title="",content="",style=info,script-name=net-info-panel.js,update-interval=1
