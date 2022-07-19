@@ -49,4 +49,4 @@ jobs:
           # user_email: ${{ secrets.GIT_EMAIL }}
           publish_branch: gh-pages
           publish_dir: ./
-          # cname: ruleset.tiiwoo.moe
+          cname: ruleset.tiiwoo.moe
