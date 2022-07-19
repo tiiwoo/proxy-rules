@@ -7,7 +7,7 @@ const rootPath = path.resolve(__dirname, '../');
 (async () => {
   const list = await listDir(rootPath, {
     ignoreHidden: true,
-    ignorePattern: /node_modules|Build|.DS_Store|\.(json|html|md|js|yaml)|LICENSE|Modules/
+    ignorePattern: /node_modules|Build|.DS_Store|\.(json|html|md|js|yaml)|LICENSE/
   });
 
   const html = template(list);
