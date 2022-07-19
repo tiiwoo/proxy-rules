@@ -1,5 +1,5 @@
 #!name=DNS.SB DoH
-#!desc=Enable DNS over HTTPS (DoH) with DNS.SB Public DNS.(Note: dns sb is not good in china)
+#!desc=Enable DNS over HTTPS (DoH) with DNS.SB Public DNS.
 
 [General]
 doh-server = https://doh.dns.sb/dns-query
