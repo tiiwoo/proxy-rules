@@ -1,0 +1,5 @@
+#!name=Unlock Revenuecat
+#!desc=Revenuecat
+
+[Script]
+Revenuecat = type=http-response,pattern=https:\/\/api\.revenuecat\.com,requires-body=1,max-size=0,script-path=https://ruleset.tiiwoo.moe/Script/revenuecat.js,script-update-interval=-1
