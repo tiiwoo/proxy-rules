@@ -73,8 +73,9 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
         `IP : ${info.ip}\n` +
         `AS : ${info.org}\n` +
         // `Position : ${getFlagEmoji(info.countryCode)} ${info.country} | ${info.city
-        `Position : ${getFlagEmoji(info.country)} ${info.country}\n` +
-        `Region : ${info.city} | ${info.region}`,
+        `Position : ${getFlagEmoji(info.country)} ${info.country} | ${
+          info.city
+        }`,
       icon: wifi.ssid ? "wifi.circle" : "personalhotspot.circle",
       // icon: wifi.ssid ? "wifi" : "simcard",
       "icon-color": wifi.ssid ? "#005CAF" : "#F9BF45",
