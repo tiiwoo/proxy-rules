@@ -1,0 +1,12 @@
+#!name=Ipinfo API Panel
+#!desc=网络面板 @Tiiwoo，使用 ipinfo 提供的 api
+#!system=ios
+
+[Panel]
+NetInfoPanel=title="",content="",style=info,script-name=ip-info.js,update-interval=1
+
+[Script]
+ip-info.js=script-path=https://ruleset.tiiwoo.moe/Script/ipinfo.js,type=generic
+
+[Host]
+ipinfo.io = 34.117.59.81
