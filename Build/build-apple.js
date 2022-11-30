@@ -26,8 +26,8 @@ const { isDomainLoose } = require("./lib/is-domain-loose");
         return line.replace("{{ cdn_rule }}", "🍎 Apple CDN");
       } else if (line.endsWith("{{ location_rule }}")) {
         return line.replace("{{ location_rule }}", "DIRECT");
-      } else if (line.endsWith("{{ apple_news_rule }}")) {
-        return line.replace("{{ apple_news_rule }}", "🍎 Apple");
+      } else if (line.endsWith("{{apple_news_rule}}")) {
+        return line.replace("{{apple_news_rule}}", "🍎 Apple");
       }
 
       return line;
@@ -41,7 +41,7 @@ const { isDomainLoose } = require("./lib/is-domain-loose");
       ans.push(item);
     }
   });
-  console.log(ans.join("\n"));
+  // console.log(ans.join("\n"));
   await Promise.all([
     fs.promises.writeFile(
       path.resolve(__dirname, "../List/ruleset/apple.conf"),
