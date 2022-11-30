@@ -41,11 +41,11 @@ const { isDomainLoose } = require("./lib/is-domain-loose");
       ans.push(item);
     }
   });
-  // console.log(ans);
+  console.log(ans.join("\n"));
   await Promise.all([
     fs.promises.writeFile(
       path.resolve(__dirname, "../List/ruleset/apple.conf"),
-      ans.map((domain) => domain).join("\n") + "\n",
+      ans.map((domain) => domain).join("\n"),
       "utf-8"
     ),
   ]);
