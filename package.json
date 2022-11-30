@@ -21,7 +21,7 @@
     "build": {
       "dependencies": [
         "build:apple-cdn",
-        "build:index-html"
+        "build:public"
       ]
     }
   },
