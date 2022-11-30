@@ -18,6 +18,7 @@
     "build:public": {
       "command": "node ./Build/build-public.js",
       "dependencies": [
+        "build:apple",
         "build:apple-cdn"
       ]
     },
