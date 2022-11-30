@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "build": "wireit",
+    "build:apple": "wireit",
     "build:apple-cdn": "wireit",
     "build:public": "wireit"
   },
