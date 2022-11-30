@@ -16,7 +16,7 @@ const { isDomainLoose } = require("./lib/is-domain-loose");
   )
     .split("\n")
     .map((line) => {
-      if (line.startsWith("{%")) {
+      if (line.startsWith("{%") || line.startsWith("# http")) {
         return null;
       } else if (line.endsWith("{{ default_rule }}")) {
         return line.replace("{{ default_rule }}", "🍎 Apple");
@@ -34,16 +34,18 @@ const { isDomainLoose } = require("./lib/is-domain-loose");
     });
   // .filter((domain) => typeof domain === "string" && isDomainLoose(domain));
 
+  // console.log(res);
+  let ans = [];
+  res.forEach((item) => {
+    if (item !== null) {
+      ans.push(item);
+    }
+  });
+  // console.log(ans);
   await Promise.all([
     fs.promises.writeFile(
       path.resolve(__dirname, "../List/ruleset/apple.conf"),
-      res
-        .map((domain) => {
-          if (domain != null) {
-            return domain;
-          }
-        })
-        .join("\n") + "\n",
+      ans.map((domain) => domain).join("\n") + "\n",
       "utf-8"
     ),
   ]);
