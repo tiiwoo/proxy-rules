@@ -1,4 +1,4 @@
-name: Build
+name: Cron Build
 on:
   schedule:
     - cron: "0 12 * * *"
