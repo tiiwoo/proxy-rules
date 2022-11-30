@@ -1,0 +1,12 @@
+#!name=Panel
+#!desc=Tiiwoo's Panel, for personal
+[Panel]
+# Network Info
+NetInfoPanel=title="",content="",style=info,script-name=net-info-panel.js,update-interval=1
+
+[Script]
+# Network Info
+net-info-panel.js=script-path=https://ruleset.tiiwoo.moe/Script/networkCheck.js,type=generic
+
+[Host]
+ip-api.com = 208.95.112.1

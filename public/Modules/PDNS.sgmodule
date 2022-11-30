@@ -1,0 +1,20 @@
+#!name=🌐 DNS for myself
+#!desc=针对个人而言，连接校园网 wifi 会导致部分国内软件的图片加载出现问题，故对其进行 doh 分流，本模块均使用阿里 dns 或者 dnspod 来纠正结果
+#!author=Tiiwoo
+
+[General]
+# 使 DoH 请求通过代理策略执行
+encrypted-dns-follow-outbound-mode = true
+
+[Host]
+# > 美团
+*.dianping.com = server:https://dns.alidns.com/dns-query
+*.maoyan.com = server:https://dns.alidns.com/dns-query
+*.meituan.com = server:https://dns.alidns.com/dns-query
+*.meituan.net = server:https://dns.alidns.com/dns-query
+*.mtyun.com = server:https://dns.alidns.com/dns-query
+*.neixin.cn = server:https://dns.alidns.com/dns-query
+*.sankuai.com = server:https://dns.alidns.com/dns-query
+
+# > 知乎 (仅对图片进行分流)
+*.zhimg.com = server:https://dns.alidns.com/dns-query

@@ -1,0 +1,12 @@
+#!name=Network Info Panel
+#!desc=网络面板 @Tiiwoo
+#!system=ios
+
+[Panel]
+NetInfoPanel=title="",content="",style=info,script-name=net-info-panel.js,update-interval=1
+
+[Script]
+net-info-panel.js=script-path=https://ruleset.tiiwoo.moe/Script/networkCheck.js,type=generic
+
+[Host]
+ip-api.com = 208.95.112.1

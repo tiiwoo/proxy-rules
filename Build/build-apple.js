@@ -30,14 +30,20 @@ const { isDomainLoose } = require("./lib/is-domain-loose");
         return line.replace("{{ apple_news_rule }}", "🍎 Apple");
       }
 
-      return null;
+      return line;
     });
   // .filter((domain) => typeof domain === "string" && isDomainLoose(domain));
 
   await Promise.all([
     fs.promises.writeFile(
       path.resolve(__dirname, "../List/ruleset/apple.conf"),
-      res.map((domain) => `${domain}`).join("\n") + "\n",
+      res
+        .map((domain) => {
+          if (domain != null) {
+            return domain;
+          }
+        })
+        .join("\n") + "\n",
       "utf-8"
     ),
   ]);
