@@ -1,9 +1,11 @@
-const { fetch } = require('undici');
+const { fetchWithRetry } = require('./lib/fetch-retry');
 const { promises: fsPromises } = require('fs');
 const { resolve: pathResolve } = require('path');
 
 (async () => {
-  const cidr = (await (await fetch('https://raw.githubusercontent.com/misakaio/chnroutes2/master/chnroutes.txt')).text()).split('\n');
+  console.time('Total Time - build-chnroutes-cidr');
+
+  const cidr = (await (await fetchWithRetry('https://raw.githubusercontent.com/misakaio/chnroutes2/master/chnroutes.txt')).text()).split('\n');
 
   const filteredCidr = cidr.filter(line => {
     if (line) {
@@ -13,7 +15,9 @@ const { resolve: pathResolve } = require('path');
     return false;
   })
 
-  return fsPromises.writeFile(pathResolve(__dirname, '../List/ip/china_ip.conf'), makeCidrList(filteredCidr), { encoding: 'utf-8' });
+  await fsPromises.writeFile(pathResolve(__dirname, '../List/ip/china_ip.conf'), makeCidrList(filteredCidr), { encoding: 'utf-8' });
+
+  console.timeEnd('Total Time - build-chnroutes-cidr');
 })();
 
 function makeCidrList(cidr) {

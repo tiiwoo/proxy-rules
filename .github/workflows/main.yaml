@@ -4,7 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 12 * * *'
+    - cron: "0 12 * * *"
 
 jobs:
   build:
@@ -32,13 +32,14 @@ jobs:
           run_install: false
       - name: Get pnpm store directory
         id: pnpm-cache
+        shell: bash
         run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v3
         name: Setup pnpm cache
         with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: runner.os−pnpm−store−{{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       - run: pnpm i
@@ -46,9 +47,9 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GIT_TOKEN }}
           user_name: ${{ secrets.GIT_USER }}
           user_email: ${{ secrets.GIT_EMAIL }}
           publish_branch: gh-pages
-          publish_dir: ./
+          publish_dir: public
           cname: ruleset.tiiwoo.moe
