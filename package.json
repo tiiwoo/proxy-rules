@@ -9,6 +9,9 @@
     "build:public": "wireit"
   },
   "wireit": {
+    "build:apple": {
+      "command": "node ./Build/build-apple.js"
+    },
     "build:apple-cdn": {
       "command": "node ./Build/build-apple-cdn.js"
     },
@@ -20,6 +23,7 @@
     },
     "build": {
       "dependencies": [
+        "build:apple",
         "build:apple-cdn",
         "build:public"
       ]
