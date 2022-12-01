@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 (async () => {
-  console.time("Total Time - build-apple-conf");
+  console.time("Total Time - build-apple-tpl");
 
   const res = (
     await (
@@ -38,5 +38,5 @@ const path = require("path");
     ),
   ]);
 
-  console.timeEnd("Total Time - build-apple-conf");
+  console.timeEnd("Total Time - build-apple-tpl");
 })();

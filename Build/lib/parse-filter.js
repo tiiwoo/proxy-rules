@@ -12,12 +12,12 @@ const warnOnce = (url, isWhite, ...message) => {
   }
   warnOnceUrl.add(key);
   console.warn(url, isWhite ? '(white)' : '(black)', ...message);
-}
+};
 
 /**
  * @param {string | URL} domainListsUrl
  */
-async function processDomainLists (domainListsUrl) {
+async function processDomainLists(domainListsUrl) {
   if (typeof domainListsUrl === 'string') {
     domainListsUrl = new URL(domainListsUrl);
   }
@@ -25,15 +25,17 @@ async function processDomainLists (domainListsUrl) {
   /** @type Set<string> */
   const domainSets = new Set();
   /** @type string[] */
-  const domains = (await (await fetchWithRetry(domainListsUrl)).text()).split('\n');
-  domains.forEach(line => {
+  const domains = (await (await fetchWithRetry(domainListsUrl)).text()).split(
+    '\n'
+  );
+  domains.forEach((line) => {
     if (
-      line.startsWith('#')
-      || line.startsWith('!')
-      || line.startsWith(' ')
-      || line === ''
-      || line.startsWith('\r')
-      || line.startsWith('\n')
+      line.startsWith('#') ||
+      line.startsWith('!') ||
+      line.startsWith(' ') ||
+      line === '' ||
+      line.startsWith('\r') ||
+      line.startsWith('\n')
     ) {
       return;
     }
@@ -54,7 +56,7 @@ async function processDomainLists (domainListsUrl) {
 /**
  * @param {string | URL} hostsUrl
  */
-async function processHosts (hostsUrl, includeAllSubDomain = false) {
+async function processHosts(hostsUrl, includeAllSubDomain = false) {
   console.time(`   - processHosts: ${hostsUrl}`);
 
   if (typeof hostsUrl === 'string') {
@@ -66,11 +68,16 @@ async function processHosts (hostsUrl, includeAllSubDomain = false) {
 
   /** @type string[] */
   const hosts = (await (await fetchWithRetry(hostsUrl)).text()).split('\n');
-  hosts.forEach(line => {
+  hosts.forEach((line) => {
     if (line.includes('#')) {
       return;
     }
-    if (line.startsWith(' ') || line.startsWith('\r') || line.startsWith('\n') || line.trim() === '') {
+    if (
+      line.startsWith(' ') ||
+      line.startsWith('\r') ||
+      line.startsWith('\n') ||
+      line.trim() === ''
+    ) {
       return;
     }
     const [, ...domains] = line.split(' ');
@@ -101,7 +108,7 @@ async function processHosts (hostsUrl, includeAllSubDomain = false) {
  * @param {(string | URL)[] | undefined} fallbackUrls
  * @returns {Promise<{ white: Set<string>, black: Set<string>, foundDebugDomain: boolean }>}
  */
-async function processFilterRules (filterRulesUrl, fallbackUrls) {
+async function processFilterRules(filterRulesUrl, fallbackUrls) {
   console.time(`   - processFilterRules: ${filterRulesUrl}`);
 
   /** @type Set<string> */
@@ -114,11 +121,13 @@ async function processFilterRules (filterRulesUrl, fallbackUrls) {
     /** @type string[] */
     filterRules = (
       await Promise.any(
-        [filterRulesUrl, ...(fallbackUrls || [])].map(
-          async url => (await fetchWithRetry(url)).text()
+        [filterRulesUrl, ...(fallbackUrls || [])].map(async (url) =>
+          (await fetchWithRetry(url)).text()
         )
       )
-    ).split('\n').map(line => line.trim());
+    )
+      .split('\n')
+      .map((line) => line.trim());
   } catch (e) {
     console.log('Download Rule for [' + filterRulesUrl + '] failed');
     throw e;
@@ -130,14 +139,14 @@ async function processFilterRules (filterRulesUrl, fallbackUrls) {
     const lineStartsWithDoubleVerticalBar = line.startsWith('||');
 
     if (
-      line === ''
-      || line.includes('#')
-      || line.includes('!')
-      || line.includes('*')
-      || line.includes('/')
-      || line.includes('[')
-      || line.includes('(')
-      || line.includes('$') && !lineStartsWithDoubleVerticalBar
+      line === '' ||
+      line.includes('#') ||
+      line.includes('!') ||
+      line.includes('*') ||
+      line.includes('/') ||
+      line.includes('[') ||
+      line.includes('(') ||
+      (line.includes('$') && !lineStartsWithDoubleVerticalBar)
     ) {
       continue;
     }
@@ -156,15 +165,16 @@ async function processFilterRules (filterRulesUrl, fallbackUrls) {
 
         whitelistDomainSets.add(domain);
       } else {
-        console.warn('      * [parse-filter white] ' + _domain + ' is not a valid domain');
+        console.warn(
+          '      * [parse-filter white] ' + _domain + ' is not a valid domain'
+        );
       }
-    } else if (line.startsWith('@@||')
-      && (
-        lineEndsWithCaret
-        || lineEndsWithCaretVerticalBar
-        || line.endsWith('^$badfilter')
-        || line.endsWith('^$1p')
-      )
+    } else if (
+      line.startsWith('@@||') &&
+      (lineEndsWithCaret ||
+        lineEndsWithCaretVerticalBar ||
+        line.endsWith('^$badfilter') ||
+        line.endsWith('^$1p'))
     ) {
       const _domain = line
         .replaceAll('@@||', '')
@@ -184,15 +194,15 @@ async function processFilterRules (filterRulesUrl, fallbackUrls) {
 
         whitelistDomainSets.add(domain);
       } else {
-        console.warn('      * [parse-filter white] ' + _domain + ' is not a valid domain');
+        console.warn(
+          '      * [parse-filter white] ' + _domain + ' is not a valid domain'
+        );
       }
     } else if (
-      lineStartsWithDoubleVerticalBar
-      && (
-        lineEndsWithCaret
-        || lineEndsWithCaretVerticalBar
-        || line.endsWith('^$all')
-      )
+      lineStartsWithDoubleVerticalBar &&
+      (lineEndsWithCaret ||
+        lineEndsWithCaretVerticalBar ||
+        line.endsWith('^$all'))
     ) {
       const _domain = line
         .replaceAll('||', '')
@@ -212,13 +222,13 @@ async function processFilterRules (filterRulesUrl, fallbackUrls) {
         blacklistDomainSets.add(`.${domain}`);
       }
     } else if (
-      line.startsWith('://')
-      && (
-        lineEndsWithCaret
-        || lineEndsWithCaretVerticalBar
-      )
+      line.startsWith('://') &&
+      (lineEndsWithCaret || lineEndsWithCaretVerticalBar)
     ) {
-      const _domain = `${line.replaceAll('://', '').replaceAll('^|', '').replaceAll('^', '')}`.trim();
+      const _domain = `${line
+        .replaceAll('://', '')
+        .replaceAll('^|', '')
+        .replaceAll('^', '')}`.trim();
       const domain = normalizeDomain(_domain);
       if (domain) {
         if (DEBUG_DOMAIN_TO_FIND && domain.includes(DEBUG_DOMAIN_TO_FIND)) {
@@ -236,18 +246,16 @@ async function processFilterRules (filterRulesUrl, fallbackUrls) {
   return {
     white: whitelistDomainSets,
     black: blacklistDomainSets,
-    foundDebugDomain
+    foundDebugDomain,
   };
 }
 
-function preprocessFullDomainSetBeforeUsedAsWorkerData (data) {
-  return data.filter(domain => (
-    domain.charCodeAt(0) === 46
-  ));
+function preprocessFullDomainSetBeforeUsedAsWorkerData(data) {
+  return data.filter((domain) => domain.charCodeAt(0) === 46);
 }
-
 
 module.exports.processDomainLists = processDomainLists;
 module.exports.processHosts = processHosts;
 module.exports.processFilterRules = processFilterRules;
-module.exports.preprocessFullDomainSetBeforeUsedAsWorkerData = preprocessFullDomainSetBeforeUsedAsWorkerData;
+module.exports.preprocessFullDomainSetBeforeUsedAsWorkerData =
+  preprocessFullDomainSetBeforeUsedAsWorkerData;

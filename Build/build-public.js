@@ -1,18 +1,18 @@
-const listDir = require("@sukka/listdir");
-const path = require("path");
-const fs = require("fs");
-const fse = require("fs-extra");
+const listDir = require('@sukka/listdir');
+const path = require('path');
+const fs = require('fs');
+const fse = require('fs-extra');
 
-const rootPath = path.resolve(__dirname, "../");
-const publicPath = path.resolve(__dirname, "../public");
+const rootPath = path.resolve(__dirname, '../');
+const publicPath = path.resolve(__dirname, '../public');
 
 const folderAndFilesToBeDeployed = [
-  "Assets",
-  "List",
-  "Modules",
-  "Script",
-  "LICENSE",
-  "README.md",
+  'Assets',
+  'List',
+  'Modules',
+  'Script',
+  'LICENSE',
+  'README.md',
 ];
 
 (async () => {
@@ -31,9 +31,9 @@ const folderAndFilesToBeDeployed = [
   const html = template(list);
 
   await fs.promises.writeFile(
-    path.join(publicPath, "index.html"),
+    path.join(publicPath, 'index.html'),
     html,
-    "utf-8"
+    'utf-8'
   );
 })();
 
@@ -75,7 +75,7 @@ function template(urlList) {
         ${urlList
           .sort()
           .map((url) => `<li><a href="${url}" target="_blank">${url}</a></li>`)
-          .join("")}
+          .join('')}
       </ul>
     </main>
   </body>
