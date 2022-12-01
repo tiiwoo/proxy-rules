@@ -7,7 +7,8 @@
     "build": "wireit",
     "build:apple": "wireit",
     "build:apple-cdn": "wireit",
-    "build:public": "wireit"
+    "build:public": "wireit",
+    "build:apple-tpl": "wireit"
   },
   "wireit": {
     "build:apple": {
@@ -23,10 +24,14 @@
         "build:apple-cdn"
       ]
     },
+    "build:apple-tpl": {
+      "command": "node ./Build/surgio/build-apple-tpl.js"
+    },
     "build": {
       "dependencies": [
         "build:apple",
         "build:apple-cdn",
+        "build:apple-tpl",
         "build:public"
       ]
     }
