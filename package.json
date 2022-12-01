@@ -7,6 +7,7 @@
     "build": "wireit",
     "build:apple": "wireit",
     "build:apple-cdn": "wireit",
+    "build:chn-cidr": "wireit",
     "build:public": "wireit",
     "build:apple-tpl": "wireit"
   },
@@ -17,21 +18,27 @@
     "build:apple-cdn": {
       "command": "node ./Build/build-apple-cdn.js"
     },
+    "build:apple-tpl": {
+      "command": "node ./Build/surgio/build-apple-tpl.js"
+    },
+    "build:chn-cidr": {
+      "command": "node ./Build/build-chn-cidr.js"
+    },
     "build:public": {
       "command": "node ./Build/build-public.js",
       "dependencies": [
         "build:apple",
-        "build:apple-cdn"
+        "build:apple-cdn",
+        "build:apple-tpl",
+        "build:chn-cidr"
       ]
-    },
-    "build:apple-tpl": {
-      "command": "node ./Build/surgio/build-apple-tpl.js"
     },
     "build": {
       "dependencies": [
         "build:apple",
         "build:apple-cdn",
         "build:apple-tpl",
+        "build:chn-cidr",
         "build:public"
       ]
     }

@@ -3,12 +3,12 @@ const fs = require('fs');
 const path = require('path');
 
 (async () => {
-  console.time('Total Time - build-apple-tpl');
+  console.time('Total Time - build-stream-conf');
 
   const res = (
     await (
       await fetchWithRetry(
-        'https://raw.githubusercontent.com/geekdada/surge-list/master/surgio-snippet/apple.tpl'
+        'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list'
       )
     ).text()
   )
@@ -38,5 +38,5 @@ const path = require('path');
     ),
   ]);
 
-  console.timeEnd('Total Time - build-apple-tpl');
+  console.timeEnd('Total Time - build-stream-conf');
 })();
