@@ -76,8 +76,8 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
         // (v4.primaryRouter && wifi.ssid ? `Router v4 @ ${v4.primaryRouter}\n` : '') +
         // (v6.primaryRouter && wifi.ssid ? `Router IPv6 @ ${v6.primaryRouter}\n` : '') +
         `IP : ${info.query}\n` +
-        `AS : ${ASN}\n` +
         `ISP : ${info.isp}\n` +
+        `AS : ${ASN}\n` +
         // `Position : ${getFlagEmoji(info.countryCode)} ${info.country} | ${info.city
         `Position : ${getFlagEmoji(info.countryCode)} ${info.countryCode} | ${
           info.city
