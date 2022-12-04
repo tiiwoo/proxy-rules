@@ -65,7 +65,7 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
     const ASN = /AS\d*/.exec(info.as);
     // redirect as23961 to main as57695
     if (ASN == 'AS23961') {
-      ASN = 'AS57695 Misaka Network, Inc.';
+      info.as = 'AS57695 Misaka Network, Inc.';
     }
     $done({
       title: wifi.ssid ? wifi.ssid : cellularInfo,
@@ -77,7 +77,7 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
         // (v6.primaryRouter && wifi.ssid ? `Router IPv6 @ ${v6.primaryRouter}\n` : '') +
         `IP : ${info.query}\n` +
         `ISP : ${info.isp}\n` +
-        `AS : ${ASN}\n` +
+        `AS : ${info.as}\n` +
         // `Position : ${getFlagEmoji(info.countryCode)} ${info.country} | ${info.city
         `Position : ${getFlagEmoji(info.countryCode)} ${info.countryCode} | ${
           info.city
