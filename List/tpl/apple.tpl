@@ -133,6 +133,10 @@ DOMAIN-SUFFIX,ls.apple.com,{{ location_rule }}
 DOMAIN-SUFFIX,lcdn-locator.apple.com,DIRECT
 # Caching Server Registration
 DOMAIN-SUFFIX,lcdn-registration.apple.com,DIRECT
+# Translation
+# See https://github.com/ripperhe/Bob/issues/405
+DOMAIN,sequoia.apple.com,DIRECT
+DOMAIN,seed-sequoia.siri.apple.com,DIRECT
 
 #
 # Apple 其他自选

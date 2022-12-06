@@ -65,7 +65,7 @@ if (!v4.primaryAddress && !v6.primaryAddress) {
     const ASN = /AS\d*/.exec(info.as);
     // redirect as23961 to main as57695
     if (ASN == 'AS23961') {
-      info.as = 'AS57695 Misaka Network, Inc.';
+      info.as = 'AS23961 Misaka Network, Inc.';
     }
     $done({
       title: wifi.ssid ? wifi.ssid : cellularInfo,
