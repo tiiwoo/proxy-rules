@@ -1,20 +1,20 @@
-const { fetchWithRetry } = require("../lib/fetch-retry");
-const fs = require("fs");
-const path = require("path");
+const { fetchWithRetry } = require('../lib/fetch-retry');
+const fs = require('fs');
+const path = require('path');
 
 (async () => {
-  console.time("Total Time - build-apple-tpl");
+  console.time('Total Time - build-apple-tpl');
 
   const res = (
     await (
       await fetchWithRetry(
-        "https://raw.githubusercontent.com/geekdada/surge-list/master/surgio-snippet/apple.tpl"
+        'https://raw.githubusercontent.com/geekdada/surge-list/master/surgio-snippet/apple.tpl'
       )
     ).text()
   )
-    .split("\n")
+    .split('\n')
     .map((line) => {
-      if (line.startsWith("# http")) {
+      if (line.startsWith('# http')) {
         return null;
       }
 
@@ -29,14 +29,14 @@ const path = require("path");
       ans.push(item);
     }
   });
-  console.log(ans.join("\n"));
+  // console.log(ans.join("\n"));
   await Promise.all([
     fs.promises.writeFile(
-      path.resolve(__dirname, "../../List/tpl/apple.tpl"),
-      ans.map((domain) => domain).join("\n"),
-      "utf-8"
+      path.resolve(__dirname, '../../List/tpl/apple.tpl'),
+      ans.map((domain) => domain).join('\n'),
+      'utf-8'
     ),
   ]);
 
-  console.timeEnd("Total Time - build-apple-tpl");
+  console.timeEnd('Total Time - build-apple-tpl');
 })();

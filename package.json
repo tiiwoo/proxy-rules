@@ -5,7 +5,6 @@
   "description": "",
   "scripts": {
     "build": "wireit",
-    "build:apple": "wireit",
     "build:apple-cdn": "wireit",
     "build:apple-tpl": "wireit",
     "build:chn-cidr": "wireit",
@@ -13,9 +12,6 @@
     "build:public": "wireit"
   },
   "wireit": {
-    "build:apple": {
-      "command": "node ./Build/build-apple.js"
-    },
     "build:apple-cdn": {
       "command": "node ./Build/build-apple-cdn.js"
     },
@@ -31,7 +27,6 @@
     "build:public": {
       "command": "node ./Build/build-public.js",
       "dependencies": [
-        "build:apple",
         "build:apple-cdn",
         "build:apple-tpl",
         "build:chn-cidr",
@@ -40,7 +35,6 @@
     },
     "build": {
       "dependencies": [
-        "build:apple",
         "build:apple-cdn",
         "build:apple-tpl",
         "build:chn-cidr",

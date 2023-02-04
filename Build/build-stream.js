@@ -34,12 +34,12 @@ const URLS = [
 
   await Promise.all([
     fs.promises.writeFile(
-      path.resolve(__dirname, '../List/non_ip/my_stream.conf'),
+      path.resolve(__dirname, '../List/non_ip/stream.conf'),
       nonip.map((domain) => domain).join('\n'),
       'utf-8'
     ),
     fs.promises.writeFile(
-      path.resolve(__dirname, '../List/ip/my_stream.conf'),
+      path.resolve(__dirname, '../List/ip/stream.conf'),
       ip.map((ip) => ip).join('\n'),
       'utf-8'
     ),
