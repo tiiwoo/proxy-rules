@@ -25,7 +25,8 @@ const folderAndFilesToBeDeployed = [
 
   const list = await listDir(publicPath, {
     ignoreHidden: true,
-    ignorePattern: /node_modules|Build|.DS_Store|\.(json|html|md|js)|LICENSE/,
+    ignorePattern:
+      /node_modules|Build|.DS_Store|\.(json|html|md|js)|LICENSE|Modules/,
   });
 
   const html = template(list);

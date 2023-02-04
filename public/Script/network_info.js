@@ -1,92 +1,71 @@
-/**
- * Surge 网络信息面板
- * @Nebulosa-Cat (changed by Tiiwoo)
- * 详细请见 README
- */
-const { wifi, v4, v6 } = $network;
-
-let cellularInfo = '';
-
-const radioGeneration = {
-  GPRS: '2.5G',
-  CDMA1x: '2.5G',
-  EDGE: '2.75G',
-  WCDMA: '3G',
-  HSDPA: '3.5G',
-  CDMAEVDORev0: '3.5G',
-  CDMAEVDORevA: '3.5G',
-  CDMAEVDORevB: '3.75G',
-  HSUPA: '3.75G',
-  eHRPD: '3.9G',
-  LTE: '4G',
-  NRNSA: '5G',
-  NR: '5G',
-};
-
-const carrierNames = loadCarrierNames();
-
-if (!v4.primaryAddress && !v6.primaryAddress) {
-  $done({
-    title: 'No network',
-    content:
-      'The network is not connected yet\ncheck the network and try again',
-    icon: 'wifi.exclamationmark',
-    'icon-color': '#CB1B45',
-  });
-} else {
-  if ($network['cellular-data']) {
-    const carrierId = $network['cellular-data'].carrier;
-    const radio = $network['cellular-data'].radio;
-    if (carrierId && radio) {
-      cellularInfo = carrierNames[carrierId]
-        ? carrierNames[carrierId] +
-          ' | ' +
-          radioGeneration[radio] +
-          ' - ' +
-          radio
-        : 'Cellular data | ' + radioGeneration[radio] + ' - ' + radio;
+class httpMethod {
+  /**
+   * 回调函数
+   * @param {*} resolve
+   * @param {*} reject
+   * @param {*} error
+   * @param {*} response
+   * @param {*} data
+   */
+  static _httpRequestCallback(resolve, reject, error, response, data) {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(Object.assign(response, { data }));
     }
   }
-  $httpClient.get('http://ip-api.com/json', function (error, response, data) {
-    if (error) {
-      $done({
-        title: 'An error occurred',
-        content:
-          'Unable to get current network information\ncheck the network status and try again',
-        icon: 'wifi.exclamationmark',
-        'icon-color': '#CB1B45',
-      });
-    }
 
-    const info = JSON.parse(data);
-    if (info.isp == '' && info.org != '') {
-      info.isp = info.org;
-    }
-    const ASN = /AS\d*/.exec(info.as);
-    // redirect as23961 to main as57695
-    if (ASN == 'AS23961') {
-      info.as = 'AS23961 Misaka Network, Inc.';
-    }
-    $done({
-      title: wifi.ssid ? wifi.ssid : cellularInfo,
-      content:
-        // `[IP Address]\n` +
-        // (v4.primaryAddress ? `v4 @ ${v4.primaryAddress} \n` : '') +
-        // (v6.primaryAddress ? `v6 @ ${v6.primaryAddress}\n` : '') +
-        // (v4.primaryRouter && wifi.ssid ? `Router v4 @ ${v4.primaryRouter}\n` : '') +
-        // (v6.primaryRouter && wifi.ssid ? `Router IPv6 @ ${v6.primaryRouter}\n` : '') +
-        `IP : ${info.query}\n` +
-        `ISP : ${info.isp}\n` +
-        `AS : ${info.as}\n` +
-        // `Position : ${getFlagEmoji(info.countryCode)} ${info.country} | ${info.city
-        `Position : ${getFlagEmoji(info.countryCode)} ${info.countryCode} | ${
-          info.city
-        }`,
-      icon: wifi.ssid ? 'wifi.circle' : 'personalhotspot.circle',
-      // icon: wifi.ssid ? "wifi" : "simcard",
-      'icon-color': wifi.ssid ? '#005CAF' : '#F9BF45',
+  /**
+   * HTTP GET
+   * @param {Object} option 选项
+   * @returns
+   */
+  static get(option = {}) {
+    return new Promise((resolve, reject) => {
+      $httpClient.get(option, (error, response, data) => {
+        this._httpRequestCallback(resolve, reject, error, response, data);
+      });
     });
-  });
+  }
+
+  /**
+   * HTTP POST
+   * @param {Object} option 选项
+   * @returns
+   */
+  static post(option = {}) {
+    return new Promise((resolve, reject) => {
+      $httpClient.post(option, (error, response, data) => {
+        this._httpRequestCallback(resolve, reject, error, response, data);
+      });
+    });
+  }
+}
+
+class loggerUtil {
+  constructor() {
+    this.id = randomString();
+  }
+
+  log(message) {
+    message = `[${this.id}] [ LOG ] ${message}`;
+    console.log(message);
+  }
+
+  error(message) {
+    message = `[${this.id}] [ERROR] ${message}`;
+    console.log(message);
+  }
+}
+
+var logger = new loggerUtil();
+
+function randomString(e = 6) {
+  var t = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678',
+    a = t.length,
+    n = '';
+  for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+  return n;
 }
 
 function getFlagEmoji(countryCode) {
@@ -98,31 +77,31 @@ function getFlagEmoji(countryCode) {
 }
 
 function loadCarrierNames() {
-  // 整理逻辑:前三码相同->后两码同电信->剩下的
+  //整理逻辑:前三码相同->后两码相同运营商->剩下的
   return {
-    // 台湾 Taiwan
-    '466-11': 'Chunghwa Telecom',
-    '466-92': 'Chunghwa Telecom',
-    '466-01': 'Far EasTone',
-    '466-03': 'Far EasTone',
-    '466-97': 'Taiwan Mobile',
-    '466-89': 'Taiwan Star Telecom',
+    //台湾运营商 Taiwan
+    '466-11': '中華電信',
+    '466-92': '中華電信',
+    '466-01': '遠傳電信',
+    '466-03': '遠傳電信',
+    '466-97': '台灣大哥大',
+    '466-89': '台灣之星',
     '466-05': 'GT',
-    // 中国大陆 China
-    '460-03': 'China Telecom',
-    '460-05': 'China Telecom',
-    '460-11': 'China Telecom',
-    '460-01': 'China Unicom',
-    '460-06': 'China Unicom',
-    '460-09': 'China Unicom',
-    '460-00': 'China Mobile',
-    '460-02': 'China Mobile',
-    '460-04': 'China Mobile',
-    '460-07': 'China Mobile',
-    '460-08': 'China Mobile',
-    '460-15': 'China Broadnet',
-    '460-20': 'China Mobile Tietong',
-    // 香港 HongKong
+    //大陆运营商 China
+    '460-03': '中国电信',
+    '460-05': '中国电信',
+    '460-11': '中国电信',
+    '460-01': '中国联通',
+    '460-06': '中国联通',
+    '460-09': '中国联通',
+    '460-00': '中国移动',
+    '460-02': '中国移动',
+    '460-04': '中国移动',
+    '460-07': '中国移动',
+    '460-08': '中国移动',
+    '460-15': '中国广电',
+    '460-20': '中移铁通',
+    //香港运营商 HongKong
     '454-00': 'CSL',
     '454-02': 'CSL',
     '454-10': 'CSL',
@@ -142,12 +121,12 @@ function loadCarrierNames() {
     '454-19': 'csl.',
     '454-20': 'csl.',
     '454-29': 'csl.',
-    '454-01': 'CITIC Telecom International',
+    '454-01': '中信國際電訊',
     '454-07': 'UNICOM HK',
     '454-08': 'Truphone',
     '454-11': 'CHKTL',
     '454-23': 'Lycamobile',
-    // 日本 Japan
+    //日本运营商 Japan
     '440-00': 'Y!mobile',
     '440-10': 'docomo',
     '440-11': 'Rakuten',
@@ -159,7 +138,7 @@ function loadCarrierNames() {
     '440-54': ' au',
     '441-00': 'WCP',
     '441-10': 'UQ WiMAX',
-    // 韩国 Korea
+    //韩国运营商 Korea
     '450-03': 'SKT',
     '450-05': 'SKT',
     '450-02': 'KT',
@@ -167,7 +146,7 @@ function loadCarrierNames() {
     '450-08': 'KT',
     '450-06': 'LG U+',
     '450-10': 'LG U+',
-    // 美国 USA
+    //美国运营商 USA
     '310-030': 'AT&T',
     '310-070': 'AT&T',
     '310-150': 'AT&T',
@@ -350,7 +329,7 @@ function loadCarrierNames() {
     '310-340': 'Westlink Communications, LLC',
     '311-070': 'Wisconsin RSA #7 Limited Partnership',
     '310-390': 'Yorkville Telephone Cooperative',
-    // 英国 UK
+    //英国运营商 UK
     '234-08': 'BT OnePhone UK',
     '234-10': 'O2-UK',
     '234-15': 'vodafone UK',
@@ -361,7 +340,7 @@ function loadCarrierNames() {
     '234-50': 'JT',
     '234-55': 'Sure',
     '234-58': 'Manx Telecom',
-    // 菲律宾 Philippine
+    //菲律宾运营商 Philippine
     '515-01': 'Islacom',
     '515-02': 'Globe',
     '515-03': 'Smart',
@@ -369,7 +348,7 @@ function loadCarrierNames() {
     '515-08': 'Next Mobile',
     '515-18': 'Cure',
     '515-24': 'ABS-CBN',
-    // 越南 Vietnam
+    //越南运营商 Vietnam
     '452-01': 'Mobifone',
     '452-02': 'VinaPhone',
     '452-03': 'S-Fone',
@@ -379,3 +358,151 @@ function loadCarrierNames() {
     '452-07': 'Gmobile',
   };
 }
+
+//获取手机运营商信息(通过内置的 API 调用设备信息)
+function getCellularInfo() {
+  const radioGeneration = {
+    GPRS: '2.5G',
+    CDMA1x: '2.5G',
+    EDGE: '2.75G',
+    WCDMA: '3G',
+    HSDPA: '3.5G',
+    CDMAEVDORev0: '3.5G',
+    CDMAEVDORevA: '3.5G',
+    CDMAEVDORevB: '3.75G',
+    HSUPA: '3.75G',
+    eHRPD: '3.9G',
+    LTE: '4G',
+    NRNSA: '5G',
+    NR: '5G',
+  };
+
+  let cellularInfo = '';
+  const carrierNames = loadCarrierNames();
+  if ($network['cellular-data']) {
+    const carrierId = $network['cellular-data'].carrier;
+    const radio = $network['cellular-data'].radio;
+    if (carrierId && radio) {
+      cellularInfo = carrierNames[carrierId]
+        ? carrierNames[carrierId] +
+          ' | ' +
+          radioGeneration[radio] +
+          ' - ' +
+          radio
+        : '蜂窝数据 | ' + radioGeneration[radio] + ' - ' + radio;
+    }
+  }
+  return cellularInfo;
+}
+
+function getSSID() {
+  return $network.wifi?.ssid;
+}
+
+function getIP() {
+  const { v4, v6 } = $network;
+  let info = [];
+  if (!v4 && !v6) {
+    info = ['网路可能切换', '请手动刷新以重新获取 IP'];
+  } else {
+    if (v4?.primaryAddress) info.push(`v4 @ ${v4?.primaryAddress}`);
+    if (v6?.primaryAddress) info.push(`v6 @ ${v6?.primaryAddress}`);
+    if (v4?.primaryRouter && getSSID())
+      info.push(`Router v4 @ ${v4?.primaryRouter}`);
+    if (v6?.primaryRouter && getSSID())
+      info.push(`Router IPv6 @ ${v6?.primaryRouter}`);
+  }
+  info = info.join('\n');
+  return info + '\n';
+}
+
+/**
+ * 获取 IP 信息
+ * @param {*} retryTimes // 重试次数
+ * @param {*} retryInterval // 重试间隔 ms
+ */
+function getNetworkInfo(retryTimes = 5, retryInterval = 1000) {
+  // 发送网络请求
+  httpMethod
+    .get('http://ip-api.com/json')
+    .then((response) => {
+      if (Number(response.status) > 300) {
+        throw new Error(
+          `Request error with http status code: ${response.status}\n${response.data}`
+        );
+      }
+      const info = JSON.parse(response.data);
+      $done({
+        title: getSSID() ?? getCellularInfo(),
+        content:
+          `[IP 地址]\n` +
+          getIP() +
+          `[节点 IP] ${info.query}\n` +
+          `[节点 ISP] ${info.isp}\n` +
+          `[节点位置] ${getFlagEmoji(info.countryCode)} | ${info.country} - ${
+            info.city
+          }`,
+        icon: getSSID() ? 'wifi' : 'simcard',
+        'icon-color': getSSID() ? '#005CAF' : '#F9BF45',
+      });
+    })
+    .catch((error) => {
+      // 网络切换
+      if (String(error).startsWith('Network changed')) {
+        if (getSSID()) {
+          $network.wifi = undefined;
+          $network.v4 = undefined;
+          $network.v6 = undefined;
+        }
+      }
+      // 判断是否还有重试机会
+      if (retryTimes > 0) {
+        logger.error(error);
+        logger.log(`Retry after ${retryInterval}ms`);
+        // retryInterval 时间后再次执行该函数
+        setTimeout(
+          () => getNetworkInfo(--retryTimes, retryInterval),
+          retryInterval
+        );
+      } else {
+        // 打印日志
+        logger.error(error);
+        $done({
+          title: '发生错误',
+          content: '无法获取当前网络信息\n请检查网络状态后重试',
+          icon: 'wifi.exclamationmark',
+          'icon-color': '#CB1B45',
+        });
+      }
+    });
+}
+
+/**
+ * 主要逻辑，程序入口
+ */
+(() => {
+  const retryTimes = 5;
+  const retryInterval = 1000;
+  // Surge 脚本超时时间设置为 30s
+  // 提前 500ms 手动结束进程
+  const surgeMaxTimeout = 29500;
+  // 脚本超时时间
+  // retryTimes * 5000 为每次网络请求超时时间（Surge 网络请求超时为 5s）
+  const scriptTimeout = retryTimes * 5000 + retryTimes * retryInterval;
+  setTimeout(
+    () => {
+      logger.log('Script timeout');
+      $done({
+        title: '请求超时',
+        content: '连接请求超时\n请检查网络状态后重试',
+        icon: 'wifi.exclamationmark',
+        'icon-color': '#CB1B45',
+      });
+    },
+    scriptTimeout > surgeMaxTimeout ? surgeMaxTimeout : scriptTimeout
+  );
+
+  // 获取网络信息
+  logger.log('Script start');
+  getNetworkInfo(retryTimes, retryInterval);
+})();

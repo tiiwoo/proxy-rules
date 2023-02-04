@@ -1,0 +1,14 @@
+#!name=fuck bili cdn
+#!desc=fuck low speed bilibili cdn
+[General]
+force-http-engine-hosts =  %APPEND% cn*.bilivideo.com
+
+[Rule]
+OR,((DOMAIN-SUFFIX,szbdyd.com), (DOMAIN-SUFFIX,mcdn.bilivideo.com), (DEST-PORT,4480)),REJECT
+# OR,((AND,((OR,((DOMAIN-KEYWORD,cn-), (DOMAIN-KEYWORD,mcdn))), (DOMAIN-KEYWORD,bilivideo.c))), (DOMAIN-SUFFIX,szbdyd.com), (DEST-PORT,4480)),REJECT-NO-DROP
+
+[URL Rewrite]
+cn.*bilivideo.com - reject
+
+[MITM]
+hostname= %APPEND% cn*.bilivideo.com
