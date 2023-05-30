@@ -40,7 +40,7 @@ const URLS = [
         'Surge Rules - Stream',
         [
           'License: AGPL 3.0',
-          'Homepage: https://ruleset.looplab.moe',
+          'Homepage: https://ruleset.tiiwoo.moe',
           'GitHub: https://github.com/Tiiwoo/Surge',
           '',
           'This file contains Netflix and Disney rules.',
@@ -58,7 +58,7 @@ const URLS = [
         'Surge Rules - Stream',
         [
           'License: AGPL 3.0',
-          'Homepage: https://ruleset.looplab.moe',
+          'Homepage: https://ruleset.tiiwoo.moe',
           'GitHub: https://github.com/Tiiwoo/Surge',
           '',
           'This file contains Netflix and Disney rules.',

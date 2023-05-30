@@ -33,7 +33,7 @@ const { compareAndWriteFile } = require('./lib/string-array-compare');
       'Surge Rules - Mainland China IPv4 CIDR',
       [
         'License: CC BY-SA 2.0',
-        'Homepage: https://ruleset.looplab.moe',
+        'Homepage: https://ruleset.tiiwoo.moe',
         'GitHub: https://github.com/Tiiwoo/Surge',
         '',
         'Data from https://misaka.io (misakaio @ GitHub)',

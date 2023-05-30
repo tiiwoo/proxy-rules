@@ -32,7 +32,7 @@ const { withBannerArray } = require('./lib/with-banner');
         'Surge Rules - Apple CDN',
         [
           'License: AGPL 3.0',
-          'Homepage: https://ruleset.looplab.moe',
+          'Homepage: https://ruleset.tiiwoo.moe',
           'GitHub: https://github.com/Tiiwoo/Surge',
           '',
           "This file contains Apple's domains using their China mainland CDN servers.",
@@ -50,7 +50,7 @@ const { withBannerArray } = require('./lib/with-banner');
         'Surge Rules - Apple CDN',
         [
           'License: AGPL 3.0',
-          'Homepage: https://ruleset.looplab.moe',
+          'Homepage: https://ruleset.tiiwoo.moe',
           'GitHub: https://github.com/Tiiwoo/Surge',
           '',
           "This file contains Apple's domains using their China mainland CDN servers.",
