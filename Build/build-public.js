@@ -62,13 +62,13 @@ function template(urlList) {
     <meta property="og:image" content="https://cdn.skk.moe/favicon/android-chrome-192x192.png">
     <meta property="og:description" content="Tiiwoo 自用的 Surge 规则组">
     <meta name="twitter:card" content="summary">
-    <link rel="canonical" href="https://ruleset.tiiwoo.moe/">
+    <link rel="canonical" href="https://ruleset.looplab.moe/">
     <link rel="stylesheet" href="https://cdn.staticfile.org/picocss/1.5.0/pico.slim.min.css">
   </head>
   <body>
     <main class="container">
       <h1>Rulesets For Surge</h1>
-      <p>Made by <a href="https://tiiwoo.moe">Tiiwoo</a></p>
+      <p>Made by <a href="https://looplab.moe">Tiiwoo</a></p>
       <p>Last Updated: ${new Date().toISOString()}</p>
       <hr>
       <br>

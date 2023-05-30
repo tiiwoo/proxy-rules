@@ -1,5 +1,10 @@
 .DS_Store
 node_modules
 .wireit
-.gitignore
 public
+
+List/domainset/apple_cdn.conf
+List/ip/china_ip.conf
+List/ip/stream.conf
+List/non_ip/apple_cdn.conf
+List/non_ip/stream.conf
