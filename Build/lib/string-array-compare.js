@@ -20,7 +20,7 @@ function stringArrayCompare(linesA, linesB) {
   for (let i = 0; i < linesA.length; i++) {
     const lineA = linesA[i];
     const lineB = linesB[i];
-    if (lineA.startsWith('#') && lineB.startsWith('#')) {
+    if (lineA.startsWith('##') && lineB.startsWith('##')) {
       continue;
     }
     if (lineA !== lineB) {
