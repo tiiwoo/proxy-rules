@@ -1,31 +1,32 @@
-const { fetchWithRetry } = require('./lib/fetch-retry');
+// @ts-check
+const {
+  fetchRemoteTextAndCreateReadlineInterface,
+} = require('./lib/fetch-remote-text-by-line');
 const { withBannerArray } = require('./lib/with-banner');
 const { resolve: pathResolve } = require('path');
 const { compareAndWriteFile } = require('./lib/string-array-compare');
+const { processLine } = require('./lib/process-line');
+
+// https://github.com/misakaio/chnroutes2/issues/25
+const EXCLUDE_CIDRS = ['223.118.0.0/15', '223.120.0.0/15'];
 
 (async () => {
   console.time('Total Time - build-chnroutes-cidr');
+  const { exclude: excludeCidrs } = await import('cidr-tools-wasm');
 
-  const [rawCidr, { merge: mergeCidrs }] = await Promise.all([
-    (
-      await fetchWithRetry(
-        'https://raw.githubusercontent.com/misakaio/chnroutes2/master/chnroutes.txt'
-      )
-    ).text(),
-    import('cidr-tools'),
-  ]);
-  const cidr = rawCidr.split('\n');
+  /** @type {Set<string>} */
+  const cidr = new Set();
+  for await (const line of await fetchRemoteTextAndCreateReadlineInterface(
+    'https://raw.githubusercontent.com/misakaio/chnroutes2/master/chnroutes.txt'
+  )) {
+    const l = processLine(line);
+    if (l) {
+      cidr.add(l);
+    }
+  }
 
-  console.log('Before Merge:', cidr.length);
-  const filteredCidr = mergeCidrs(
-    cidr.filter((line) => {
-      if (line) {
-        return !line.startsWith('#');
-      }
-
-      return false;
-    })
-  );
+  console.log('Before Merge:', cidr.size);
+  const filteredCidr = excludeCidrs(Array.from(cidr), EXCLUDE_CIDRS, true);
   console.log('After Merge:', filteredCidr.length);
 
   await compareAndWriteFile(
