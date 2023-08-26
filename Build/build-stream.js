@@ -49,7 +49,7 @@ const URLS = [
           ' - https://www.github.com/blackmatrix7/ios_rule_script',
         ],
         new Date(),
-        nonip.map((domain) => `DOMAIN-SUFFIX,${domain}`)
+        nonip.map((domain) => `${domain}`)
       ),
       path.resolve(__dirname, '../List/non_ip/stream.conf')
     ),
@@ -67,7 +67,7 @@ const URLS = [
           ' - https://www.github.com/blackmatrix7/ios_rule_script',
         ],
         new Date(),
-        ip.map((i) => `.${i}`)
+        ip.map((i) => `${i}`)
       ),
       path.resolve(__dirname, '../List/ip/stream.conf')
     ),
