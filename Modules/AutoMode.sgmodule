@@ -1,0 +1,5 @@
+#!name=Surge自动切换出站模式
+#!desc=根据当前网络自动切换模式（Wi-Fi下选择DIRECT模式，Cellular下选择RULE模式）
+
+[Script]
+event network-changed script-path=https://ruleset.tiiwoo.moe/Script/auto_mode.js
