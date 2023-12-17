@@ -49,9 +49,8 @@ DOMAIN,osxapps.itunes.apple.com,{{ cdn_rule }}
 DOMAIN,oscdn.apple.com,{{ cdn_rule }}
 # Update
 DOMAIN,supportdownload.apple.com,{{ cdn_rule }}
-# Update
 DOMAIN,appldnld.apple.com,{{ cdn_rule }}
-# Update
+DOMAIN,appldnld.apple.com.edgesuite.net,{{ cdn_rule }}
 DOMAIN,swcdn.apple.com,{{ cdn_rule }}
 DOMAIN,apptrailers.itunes.apple.com,{{ cdn_rule }}
 DOMAIN,updates-http.cdn-apple.com,{{ cdn_rule }}
@@ -132,11 +131,15 @@ DOMAIN-SUFFIX,ls.apple.com,{{ location_rule }}
 # Asset Cache Locator Service
 DOMAIN-SUFFIX,lcdn-locator.apple.com,DIRECT
 # Caching Server Registration
-DOMAIN-SUFFIX,lcdn-registration.apple.com,DIRECT
+DOMAIN,lcdn-registration.apple.com,DIRECT
+DOMAIN,suconfig.apple.com,DIRECT
+DOMAIN,xp-cdn.apple.com,DIRECT
 # Translation
 # See https://github.com/ripperhe/Bob/issues/405
 DOMAIN,sequoia.apple.com,DIRECT
 DOMAIN,seed-sequoia.siri.apple.com,DIRECT
+# Settings
+DOMAIN,sq-device.apple.com,DIRECT
 
 #
 # Apple 其他自选
