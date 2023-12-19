@@ -1,12 +1,15 @@
 .DS_Store
 node_modules
+.clinic
 .wireit
 public
 
-List/domainset/apple_cdn.conf
-List/domainset/speedtest.conf
-List/ip/china_ip.conf
-List/ip/stream.conf
-List/non_ip/apple_cdn.conf
-List/non_ip/stream.conf
-List/tpl/apple.tpl
+List/
+Clash/
+Source/domainset/apple_cdn.conf
+Source/domainset/speedtest.conf
+Source/ip/china_ip.conf
+Source/ip/stream.conf
+Source/non_ip/apple_cdn.conf
+Source/non_ip/stream.conf
+Source/tpl/apple.tpl
