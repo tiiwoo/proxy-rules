@@ -1,4 +1,4 @@
-#!name=[Sukka] Unlock AbemaTV
+#!name=[Tiiwoo] Unlock AbemaTV
 
 [MITM]
 hostname = %APPEND% abematv.akamaized.net
